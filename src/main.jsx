@@ -11,6 +11,7 @@ import Home from './components/Home.jsx';
 import Error from './components/Error.jsx';
 import BackHome from './components/BackHome.jsx';
 import About from './components/About.jsx';
+import Shop from './components/Shop.jsx';
 
 
 const router= createBrowserRouter([
@@ -28,6 +29,10 @@ const router= createBrowserRouter([
       {
         path: 'about',
         element: <About></About>
+      },
+      {
+        path:'shop',
+        element: <Shop></Shop>
       }
 
     ]
