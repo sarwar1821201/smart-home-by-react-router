@@ -9,7 +9,7 @@ const Shop = () => {
 //    console.log(productData);
 
     const handleAddToCart= (id)=>{
-        console.log(id)
+       // console.log(id)
 
 
         addToDb(id)

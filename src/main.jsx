@@ -13,6 +13,7 @@ import BackHome from './components/BackHome.jsx';
 import About from './components/About.jsx';
 import Shop from './components/Shop.jsx';
 import Cart from './components/Cart.jsx';
+import { productsAndCartData } from './loaders/getCart&ProductsData.js';
 
 
 const router= createBrowserRouter([
@@ -38,7 +39,9 @@ const router= createBrowserRouter([
       },
       {
         path:'cart',
-        element: <Cart></Cart>
+        element: <Cart></Cart>,
+        // 
+        loader: productsAndCartData,
       }
 
     ]
