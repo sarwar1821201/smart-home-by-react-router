@@ -1,7 +1,8 @@
 import React from 'react';
-import { getStoredCart } from '../utiles/fakeDb';
+import { getStoredCart, removeFromDb } from '../utiles/fakeDb';
 import { useLoaderData } from 'react-router-dom';
 import CartItem from './CartItem';
+import toast from 'react-hot-toast';
 
 const Cart = () => {
 
@@ -32,6 +33,14 @@ const Cart = () => {
         total = total + product.price * product.quantity
       }
     }
+
+      //   Remove Item From Shopping Cart
+  const handleRemoveItem = id => {
+    // const remaining = cart.filter(product => product.id !== id)
+    // setCart(remaining)
+    removeFromDb(id)
+    // toast.error('Product Removed! 🔥')
+  }
   
 
     return (
@@ -46,12 +55,50 @@ const Cart = () => {
             <CartItem
               key={product.id}
               product={product}
-            //   handleRemoveItem={handleRemoveItem}
+              handleRemoveItem={handleRemoveItem}
             />
           ))}
         </ul>
 
-        <p>{total}</p>
+        <div className='space-y-1 text-right'>
+          <p>
+            Total amount: <span className='font-semibold'>${total}</span>
+          </p>
+          <p className='text-sm text-gray-400'>
+            Not including taxes and shipping costs
+          </p>
+        </div>
+
+        <div className='flex justify-end space-x-4'>
+          {initialCart.length > 0 ? (
+            <>
+              <button
+                type='button'
+                // onClick={deleteCartHandler}
+                className='btn-outlined'
+              >
+                Clear  <span className='sr-only sm:not-sr-only'>Cart</span>
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to='/shop'>
+                <button
+                  type='button'
+                //   onClick={deleteCartHandler}
+                  className='btn-outlined'
+                >
+                  Back <span className='sr-only sm:not-sr-only'>To Shop</span>
+                </button>
+              </Link>
+            </>
+          )}
+
+          {/* <button onClick={orderHandler} type='button' className='btn-primary'>
+            Place Order
+          </button> */}
+        </div>
+
 
             </div>
         </div>
