@@ -1,6 +1,6 @@
 import React from 'react';
-import { getStoredCart, removeFromDb } from '../utiles/fakeDb';
-import { useLoaderData } from 'react-router-dom';
+import { deleteShoppingCart, getStoredCart, removeFromDb } from '../utiles/fakeDb';
+import { Link, useLoaderData } from 'react-router-dom';
 import CartItem from './CartItem';
 import toast from 'react-hot-toast';
 
@@ -41,6 +41,17 @@ const Cart = () => {
     removeFromDb(id)
     // toast.error('Product Removed! 🔥')
   }
+
+
+   //   Delete Shopping Cart
+   const deleteCartHandler = () => {
+    // if (cart.length) {
+    //   setCart([])
+      deleteShoppingCart()
+    //   return toast.error('All Items Removed! 🔥')
+    // }
+    // return toast.error('Cart is empty! 🔥')
+  }
   
 
     return (
@@ -74,7 +85,7 @@ const Cart = () => {
             <>
               <button
                 type='button'
-                // onClick={deleteCartHandler}
+                onClick={deleteCartHandler}
                 className='btn-outlined'
               >
                 Clear  <span className='sr-only sm:not-sr-only'>Cart</span>
