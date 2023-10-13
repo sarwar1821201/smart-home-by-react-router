@@ -24,7 +24,15 @@ const Cart = () => {
     // console.log(cart)
 
     const {initialCart} = useLoaderData();
-    console.log(initialCart)
+    //console.log(initialCart)
+
+    let total = 0
+    if (initialCart.length > 0) {
+      for (const product of initialCart) {
+        total = total + product.price * product.quantity
+      }
+    }
+  
 
     return (
         <div className='flex min-h-screen items-start justify-center bg-gray-100 text-gray-900'>
@@ -42,6 +50,8 @@ const Cart = () => {
             />
           ))}
         </ul>
+
+        <p>{total}</p>
 
             </div>
         </div>
