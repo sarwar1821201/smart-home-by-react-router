@@ -1,6 +1,7 @@
 import React from 'react';
 import { getStoredCart } from '../utiles/fakeDb';
 import { useLoaderData } from 'react-router-dom';
+import CartItem from './CartItem';
 
 const Cart = () => {
 
@@ -26,8 +27,23 @@ const Cart = () => {
     console.log(initialCart)
 
     return (
-        <div>
-            <h2>hello</h2>
+        <div className='flex min-h-screen items-start justify-center bg-gray-100 text-gray-900'>
+            <div className='flex flex-col max-w-3xl p-6 space-y-4 sm:p-10 '>
+            <h2 className='text-xl font-semibold'>
+          {initialCart.length ? 'Review Cart Items' : 'Cart is EMPTY!'}
+        </h2>
+
+        <ul className='flex flex-col divide-y divide-gray-700'>
+          {initialCart.map(product => (
+            <CartItem
+              key={product.id}
+              product={product}
+            //   handleRemoveItem={handleRemoveItem}
+            />
+          ))}
+        </ul>
+
+            </div>
         </div>
     );
 };
