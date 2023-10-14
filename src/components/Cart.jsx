@@ -49,14 +49,14 @@ const Cart = () => {
 
 
    //   Delete Shopping Cart
-   const deleteCartHandler = () => {
-    // if (cart.length) {
-    //   setCart([])
-      deleteShoppingCart()
-    //   return toast.error('All Items Removed! 🔥')
-    // }
-    // return toast.error('Cart is empty! 🔥')
-  }
+  //  const deleteCartHandler = () => {
+  //   // if (cart.length) {
+  //   //   setCart([])
+  //     deleteShoppingCart()
+  //   //   return toast.error('All Items Removed! 🔥')
+  //   // }
+  //   // return toast.error('Cart is empty! 🔥')
+  // }
 
 
     //   Place Order
@@ -68,6 +68,17 @@ const Cart = () => {
       }
       return toast.error('Cart is empty! 🔥')
     }
+
+
+     //   Delete Shopping Cart
+  const deleteCartHandler = () => {
+    if (cart.length) {
+      setCart([])
+      deleteShoppingCart()
+      return toast.error('All Items Removed! 🔥')
+    }
+    return toast.error('Cart is empty! 🔥')
+  }
   
 
     return (
@@ -112,7 +123,7 @@ const Cart = () => {
               <Link to='/shop'>
                 <button
                   type='button'
-                //   onClick={deleteCartHandler}
+                  onClick={deleteCartHandler}
                   className='btn-outlined'
                 >
                   Back <span className='sr-only sm:not-sr-only'>To Shop</span>
