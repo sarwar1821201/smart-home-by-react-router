@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { deleteShoppingCart, getStoredCart, removeFromDb } from '../utiles/fakeDb';
 import { Link, useLoaderData } from 'react-router-dom';
 import CartItem from './CartItem';
 import toast from 'react-hot-toast';
+import { CartContext } from './Home';
 
 const Cart = () => {
 
@@ -24,20 +25,24 @@ const Cart = () => {
   
     // console.log(cart)
 
-    const {initialCart} = useLoaderData();
+    // const {initialCart} = useLoaderData();
     //console.log(initialCart)
 
+    const [cart,setCart] =useContext(CartContext)
+
+
+
     let total = 0
-    if (initialCart.length > 0) {
-      for (const product of initialCart) {
+    if (cart.length > 0) {
+      for (const product of cart) {
         total = total + product.price * product.quantity
       }
     }
 
       //   Remove Item From Shopping Cart
   const handleRemoveItem = id => {
-    // const remaining = cart.filter(product => product.id !== id)
-    // setCart(remaining)
+    const remaining = cart.filter(product => product.id !== id)
+    setCart(remaining)
     removeFromDb(id)
     // toast.error('Product Removed! 🔥')
   }
@@ -58,11 +63,11 @@ const Cart = () => {
         <div className='flex min-h-screen items-start justify-center bg-gray-100 text-gray-900'>
             <div className='flex flex-col max-w-3xl p-6 space-y-4 sm:p-10 '>
             <h2 className='text-xl font-semibold'>
-          {initialCart.length ? 'Review Cart Items' : 'Cart is EMPTY!'}
+          {cart.length ? 'Review Cart Items' : 'Cart is EMPTY!'}
         </h2>
 
         <ul className='flex flex-col divide-y divide-gray-700'>
-          {initialCart.map(product => (
+          {cart.map(product => (
             <CartItem
               key={product.id}
               product={product}
@@ -81,7 +86,7 @@ const Cart = () => {
         </div>
 
         <div className='flex justify-end space-x-4'>
-          {initialCart.length > 0 ? (
+          {cart.length > 0 ? (
             <>
               <button
                 type='button'
