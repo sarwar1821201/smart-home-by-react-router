@@ -57,6 +57,17 @@ const Cart = () => {
     // }
     // return toast.error('Cart is empty! 🔥')
   }
+
+
+    //   Place Order
+    const orderHandler = () => {
+      if (cart.length) {
+        setCart([])
+        deleteShoppingCart()
+        return toast.success('Order Placed! 👍')
+      }
+      return toast.error('Cart is empty! 🔥')
+    }
   
 
     return (
@@ -110,9 +121,9 @@ const Cart = () => {
             </>
           )}
 
-          {/* <button onClick={orderHandler} type='button' className='btn-primary'>
+          <button onClick={orderHandler} type='button' className='btn-primary'>
             Place Order
-          </button> */}
+          </button>
         </div>
 
 
