@@ -1,27 +1,41 @@
-import React from 'react';
+import React, { createContext, useState } from 'react';
 import Header from './Header';
-import { Outlet, useNavigation } from 'react-router-dom';
+import { Outlet, useLoaderData, useNavigation } from 'react-router-dom';
 import Footer from './Footer';
+
+ export  const ProductContext = createContext([])
+  export const CartContext = createContext([])
 
 const Home = () => {
     const navigation= useNavigation();
+  
+     const { products, initialCart }=useLoaderData();
+     const [cart,setCart] =useState(initialCart)
+    // console.log(initialCart)
+
     return (
-        <div>
-            <Header></Header>
+        
+          <ProductContext.Provider value={products}  >
+              <CartContext.Provider value={[cart,setCart]} >
 
-            <div className=' justify-center  items-center'>
-                {
-                    navigation.state=== 'loading' ? 'Loading....' : ' '
-                }
-            </div>
-           
-           <div className='min-h-[calc(100vh-341px)]' >
-            <Outlet></Outlet>
-           </div>
-           
+              <Header></Header>
 
-        <Footer></Footer>
+          <div className=' justify-center  items-center'>
+     {
+        navigation.state=== 'loading' ? 'Loading....' : ' '
+     }
         </div>
+
+      <div className='min-h-[calc(100vh-341px)]' >
+      <Outlet></Outlet>
+
+      </div>
+
+       <Footer></Footer>
+
+              </CartContext.Provider>
+          </ProductContext.Provider>
+        
     );
 };
 
