@@ -100,7 +100,7 @@ const Cart = () => {
 
         <div className='space-y-1 text-right'>
           <p>
-            Total amount: <span className='font-semibold'>${total}</span>
+            Total amount: <span className='font-semibold'>$ {total} </span>
           </p>
           <p className='text-sm text-gray-400'>
             Not including taxes and shipping costs
